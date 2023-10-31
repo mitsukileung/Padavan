@@ -1,5 +1,5 @@
-SRC_NAME = ZeroTierOne-1.10.6
-SRC_URL = https://github.com/zerotier/ZeroTierOne/archive/refs/tags/1.10.6.tar.gz
+SRC_NAME = ZeroTierOne-1.12.2
+SRC_URL = https://github.com/zerotier/ZeroTierOne/archive/refs/tags/1.12.2.tar.gz
 
 THISDIR = $(shell pwd)
 FLAGS := DEFS=""
@@ -16,8 +16,11 @@ download_test:
 extract_test:
 	 if [ ! -d $(SRC_NAME) ] ; then \
 		tar xf $(SRC_NAME).tar.gz ; \
-		patch -d $(SRC_NAME) -p1 -i ../0007-add-cerrno-header-for-str-errno.patch ; \
-		patch -d $(SRC_NAME) -p1 -i ../0008-fix-compilation-for-arm_cortex-a7-neon.patch; \
+		patch -d $(SRC_NAME) -p1 -i ../0001-fix-miniupnpc-natpmp-include-paths.patch; \
+		patch -d $(SRC_NAME) -p1 -i ../0002-remove-PIE-options.patch; \
+		patch -d $(SRC_NAME) -p1 -i ../0003-fix-compilation-for-arm_cortex-a7-neon.patch; \
+		patch -d $(SRC_NAME) -p1 -i ../0004-add-missing-libatomic.patch; \
+		patch -d $(SRC_NAME) -p1 -i ../0005-remove-noexecstack.patch; \
 	 fi ;
 
 clean:
